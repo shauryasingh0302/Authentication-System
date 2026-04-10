@@ -6,7 +6,12 @@ export const AppContext = createContext()
 
 export const AppContextProvider = (props)=>{
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = import.meta.env.VITE_BACKEND_URL?.trim()
+
+    if(!backendUrl){
+        console.error('VITE_BACKEND_URL is missing. Set it in the deployed frontend environment and rebuild.')
+    }
+
     const [isLoggedin, setIsLoggedin] = useState(false)
     const [userData, setUserData] = useState(false)
 
